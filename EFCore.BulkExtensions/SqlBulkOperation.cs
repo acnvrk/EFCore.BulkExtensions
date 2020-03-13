@@ -692,10 +692,6 @@ namespace EFCore.BulkExtensions
                         {
                             propertyValue = tableInfo.ConvertibleProperties[columnName].ConvertToProvider.Invoke(propertyValue);
                         }
-                    }
-
-                    if (entityPropertiesDict.ContainsKey(property.Name))
-                    {
                         columnsDict[property.Name] = propertyValue;
                     }
                     else if (entityNavigationOwnedDict.ContainsKey(property.Name) && !tableInfo.LoadOnlyPKColumn)
