@@ -610,7 +610,7 @@ namespace EFCore.BulkExtensions
             var entityType = context.Model.FindEntityType(type);
             var entityPropertiesDict = entityType.GetProperties().Where(a => tableInfo.PropertyColumnNamesDict.ContainsKey(a.Name)).ToDictionary(a => a.Name, a => a);
             var entityNavigationOwnedDict = entityType.GetNavigations().Where(a => a.GetTargetType().IsOwned()).ToDictionary(a => a.Name, a => a);
-            var properties = type.GetProperties();
+            var properties = type.GetProperties().Where(p=> p.GetIndexParameters().Count() == 0).ToArray();
             var discriminatorColumn = tableInfo.ShadowProperties.Count == 0 ? null : tableInfo.ShadowProperties.ElementAt(0);
 
             foreach (var property in properties)
